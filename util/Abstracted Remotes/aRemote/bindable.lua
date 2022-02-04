@@ -7,12 +7,12 @@ module.__index = module
 
 function module:Connect(callback)
 	local thread = coroutine.create(function(...)
-		local args = ...
+		local args = {...}
 
 		while true do
-			callback(args)
+			callback(table.unpack(args))
 
-			args = coroutine.yield(...)
+			args = {coroutine.yield(...)}
 		end
 	end)
 
